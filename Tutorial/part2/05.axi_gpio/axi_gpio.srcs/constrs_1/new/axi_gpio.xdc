@@ -1,0 +1,8 @@
+set_property IOSTANDARD LVCMOS33 [get_ports {AXI_GPIO_KEY_tri_i[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {AXI_GPIO_KEY_tri_i[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {AXI_GPIO_LED_tri_o[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {AXI_GPIO_LED_tri_o[1]}]
+set_property PACKAGE_PIN P16 [get_ports {AXI_GPIO_KEY_tri_i[0]}]
+set_property PACKAGE_PIN P15 [get_ports {AXI_GPIO_LED_tri_o[0]}]
+set_property PACKAGE_PIN T12 [get_ports {AXI_GPIO_KEY_tri_i[1]}]
+set_property PACKAGE_PIN U12 [get_ports {AXI_GPIO_LED_tri_o[1]}]

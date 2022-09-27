@@ -1,0 +1,123 @@
+<board schema_version="2.1" vendor="microphase.cn" name="z7_lite_z7010" display_name="MicroPhase Z7 Lite (z7010)" url="www.microphase.cn" preset_file="preset.xml">
+
+<!-- Board file revision -->
+<file_version>1.0</file_version>
+
+<!-- Board PCB revision -->
+<compatible_board_revisions>
+    <revision id="1">1.0</revision>
+</compatible_board_revisions>
+
+<images>
+    <image name="z7-lite_board.png" display_name="MicroPhase Z7 Lite (Z7010)" sub_type="board">
+        <description>Microphase Z7-Lite Development board (Z7010 Version)</description>
+    </image>
+</images>
+
+<!-- Board description -->
+<description>The Z7-Lite is a development board from MicroPhase Technology. This board features 512MB DDR3 memory, 128MB QSPI Flash memory, 10/100MBit Ethernet and speed grade -1 Zynq 7010.</description>
+
+<!-- Information about board components: fpga part, interfaces, etc. -->
+<components>
+	
+    <!-- FPGA part -->
+    <component name="part0" display_name="Z7-Lite" type="fpga" part_name="xc7z010clg400-1" pin_map_file="part0_pins.xml" vendor="xilinx" spec_url="www.xilinx.com">
+        <description>FPGA part on the board</description>
+      	
+        <!-- Associated FPGA interfaces and IP cores -->
+	<interfaces>
+
+	    <!-- Zynq 7000 processing system -->
+	    <interface mode="master" name="ps7_fixedio" type="xilinx.com:display_processing_system7:fixedio_rtl:1.0" of_component="ps7_fixedio" preset_proc="ps7_preset"> 
+	        <preferred_ips>
+		    <preferred_ip vendor="xilinx.com" library="ip" name="processing_system7" order="0"/>
+	        </preferred_ips>
+            </interface>
+
+	<interface mode="slave" name="sys_clock" type="xilinx.com:signal:clock_rtl:1.0" of_component="sys_clock" preset_proc="sys_clock_preset">
+	    <port_maps>
+		<port_map logical_port="CLK" physical_port="sys_clk" dir="in">
+		    <pin_maps>
+			<pin_map port_index="0" component_pin="sys_clk"/> 
+		    </pin_maps>
+		</port_map>
+	    </port_maps>
+	    <parameters>
+		<parameter name="frequency" value="50000000" />
+	    </parameters>
+	</interface>
+
+            <!-- User Push Buttons (PL KEY1 & PL KEY2) -->
+	    <interface mode="master" name="btns_2bits" type="xilinx.com:interface:gpio_rtl:1.0" of_component="btns_2bits" preset_proc="btns_2bits_preset">
+                <preferred_ips>
+                    <preferred_ip vendor="xilinx.com" library="ip" name="axi_gpio" order="0"/>
+                </preferred_ips>
+                <port_maps>
+                    <port_map logical_port="TRI_I" physical_port="btns_2bits_tri_i" dir="in" left="1" right="0"> 
+                        <pin_maps>
+                            <pin_map port_index="0" component_pin="btns_2bits_tri_i_0"/> 
+                            <pin_map port_index="1" component_pin="btns_2bits_tri_i_1"/> 
+                        </pin_maps>
+                    </port_map>
+                </port_maps>
+            </interface>
+
+            <!-- User LEDs: Red and Green (PL LED1 & PL LED2) -->
+            <interface mode="master" name="leds_2bits" type="xilinx.com:interface:gpio_rtl:1.0" of_component="leds_2bits" preset_proc="leds_2bits_preset">
+                <preferred_ips>
+                    <preferred_ip vendor="xilinx.com" library="ip" name="axi_gpio" order="0" left="1" right="0" />
+                </preferred_ips>
+                <port_maps>
+                    <port_map logical_port="TRI_O" physical_port="leds_2bits_tri_o" dir="out" left="1" right="0"> 
+                        <pin_maps>
+                            <pin_map port_index="0" component_pin="leds_2bits_tri_o_0"/> 
+                            <pin_map port_index="1" component_pin="leds_2bits_tri_o_1"/> 
+                        </pin_maps>
+                    </port_map>
+                </port_maps>
+            </interface>
+			
+        </interfaces>
+    </component>
+
+    <!-- Zynq 7000 processing system -->
+    <component name="ps7_fixedio" display_name="PS7 fixed IO" type="chip" sub_type="fixed_io" major_group=""/>	
+
+    <!-- 50MHz PL Clock -->
+    <component name="sys_clock" display_name="System Clock" type="chip" sub_type="system_clock" major_group="Clocks">
+	<description>3.3V Single-Ended 50 MHz oscillator used as system clock on the board</description>
+    </component>
+
+    <!-- User Push Buttons (PL KEY1 and PL KEY2) -->
+    <component name="btns_2bits" display_name="BTNs" type="chip" sub_type="push_button" major_group="General Purpose Input or Output">
+        <description>PL KEY1 and PL KEY2 Push Buttons - Active Low</description>
+    </component>
+
+    <!-- User LEDs: Red and Green (PL LED1 and PL LED2) -->
+    <component name="leds_2bits" display_name="LEDs" type="chip" sub_type="led" major_group="General Purpose Input or Output">
+        <description>PL LED1 and PL LED2 - Active Low</description>
+    </component>
+
+</components>
+
+<jtag_chains>
+    <jtag_chain name="chain1">
+	<position name="0" component="part0"/>
+    </jtag_chain>
+</jtag_chains>
+
+
+<!-- Connection between components, see part0_pins.xml for pins definition -->
+<connections>
+    <connection name="part0_sys_clock" component1="part0" component2="sys_clock">
+	<connection_map name="part0_sys_clock_1" c1_st_index="0" c1_end_index="0" c2_st_index="0" c2_end_index="0"/>
+    </connection>
+    <connection name="part0_btns_2bits" component1="part0" component2="btns_2bits">
+	<connection_map name="part0_btns_2bits_1" c1_st_index="1" c1_end_index="2" c2_st_index="0" c2_end_index="1"/>
+    </connection>
+    <connection name="part0_leds_2bits" component1="part0" component2="leds_2bits">
+	<connection_map name="part0_leds_2bits_1" c1_st_index="3" c1_end_index="4" c2_st_index="0" c2_end_index="1"/>
+    </connection>
+</connections>
+
+</board>

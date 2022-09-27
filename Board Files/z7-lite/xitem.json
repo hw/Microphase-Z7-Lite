@@ -1,0 +1,29 @@
+{
+  "config": {
+    "items": [
+      {
+        "infra": {
+          "name": "z7_lite_z7010", 
+          "display": "MicroPhase Z7 Lite (Z7010)", 
+          "revision": "1.0", 
+          "description": "Microphase Z7-Lite Development board (Z7010 Version)", 
+          "company": "Microphase Technology (Shanghai) Co., Ltd", 
+          "company_display": "MicroPhase", 
+          "author": "HockWoo Tan",
+          "contributors": [], 
+          "category": "Single Part", 
+          "website": "www.microphase.cn", 
+          "logo": "z7-Lite_board.png", 
+          "search-keywords": [
+            "z7-Lite", 
+            "7020", 
+            "board", 
+            "Single Part"
+          ]
+        }
+      }
+    ]
+  }, 
+  "_major": 1, 
+  "_minor": 0
+}
